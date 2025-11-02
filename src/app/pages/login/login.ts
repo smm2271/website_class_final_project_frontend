@@ -9,4 +9,9 @@ import { Component } from '@angular/core';
 })
 
 export class Login {
+  user_name: string = "";
+  password: string = "";
+  submitLogin = () => {
+    console.log(`User Name: ${this.user_name}, Password: ${this.password}`);
+  }
 }

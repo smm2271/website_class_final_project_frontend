@@ -1,0 +1,52 @@
+
+.wrap{
+    height: calc(100vh - 80px);
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // background-color: rgba(128, 128, 128, 0.911);
+    form{
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 300px;
+
+        label{
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        h2{
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input{
+            width: 300px;
+            line-height: 32px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        button{
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+
+            &:hover{
+                background-color: #0056b3;
+            }
+        }
+    }
+}
