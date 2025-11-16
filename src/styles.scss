@@ -1,16 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+/* 全局樣式 */
 
+// 櫻花動畫效果
 .sakura {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    background: #FFB6C1;
-    border-radius: 50% 0;
-    opacity: 0.8;
-    z-index: -1;
-    animation: fall linear infinite;
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: #FFB6C1;
+  border-radius: 50% 0;
+  opacity: 0.8;
+  z-index: -1;
+  animation: fall linear infinite;
 }
+
 @keyframes fall {
-    0% { transform: translateY(-100vh) rotate(0deg); }
-    100% { transform: translateY(100vh) rotate(360deg); }
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+  }
 }

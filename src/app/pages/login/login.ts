@@ -24,8 +24,8 @@ export class Login {
 
   login() {
     const loginForm: UserLoginForm = {
-      user_id: 'testuser',
-      password: 'password123'
+      user_id: this.user_name,
+      password: this.password
     };
 
     this.userService.loginApi(loginForm).subscribe({

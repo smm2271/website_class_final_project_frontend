@@ -1,220 +1,161 @@
-@media screen and (min-width:1301px) {
-    .wrap {
-        position: relative;
-
-        h1 {
-            font-family: 'Noto Sans TC', sans-serif;
-            font-weight: 400;
-            font-size: clamp(3.5rem, 8vw, 5.625rem);
-            color: #333333;
-            margin: 1.875rem 0 0 5.5625rem;
-        }
-
-        .text {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            width: 800px;
-            height: 270px;
-            background-color: #f2f2f2;
-            margin-left: 5.5625rem;
-            margin-top: 20.625rem;
-            border-radius: 1.25rem;
-            box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.5);
-
-            p,
-            a {
-                font-family: 'Noto Sans TC', sans-serif;
-                font-weight: 500;
-                font-size: clamp(1.5rem, 3vw, 2.25rem);
-                color: #3d3d3d;
-                margin-left: 5.5625rem;
-                margin-top: 1.25rem;
-            }
-
-            a {
-                display: inline-block;
-                margin-top: 1.875rem;
-                text-decoration: none;
-                color: #333333;
-
-                &:hover {
-                    animation: micro-shake 0.5s ease-in-out infinite;
-                }
-            }
-
-            @keyframes micro-shake {
-
-                0%,
-                100% {
-                    transform: translate(0, 0) scale(1.015);
-                }
-
-                8.33% {
-                    transform: translate(-0.15px, 0.1px) scale(1.01);
-                }
-
-                16.66% {
-                    transform: translate(-0.3px, 0.25px) scale(1.005);
-                }
-
-                25% {
-                    transform: translate(-0.4px, 0.3px) scale(1);
-                }
-
-                33.33% {
-                    transform: translate(-0.25px, 0.1px) scale(0.998);
-                }
-
-                41.66% {
-                    transform: translate(0.1px, -0.15px) scale(0.996);
-                }
-
-                50% {
-                    transform: translate(0.4px, -0.3px) scale(0.995);
-                }
-
-                58.33% {
-                    transform: translate(0.25px, -0.2px) scale(0.998);
-                }
-
-                66.66% {
-                    transform: translate(0.1px, -0.1px) scale(1);
-                }
-
-                75% {
-                    transform: translate(-0.3px, -0.2px) scale(1.005);
-                }
-
-                83.33% {
-                    transform: translate(-0.15px, -0.1px) scale(1.01);
-                }
-
-                91.66% {
-                    transform: translate(0, 0) scale(1.012);
-                }
-            }
-        }
-
-        img {
-            width: 100%;
-            max-width: 68.0625rem;
-            height: auto;
-            float: right;
-            margin: 2.5rem 4.375rem 0 0;
-            border-radius: 1.25rem;
-            box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.5);
-        }
-    }
+// 共用動畫效果
+@keyframes micro-shake {
+  0%, 100% {
+    transform: translate(0, 0) scale(1.015);
+  }
+  8.33% {
+    transform: translate(-0.15px, 0.1px) scale(1.01);
+  }
+  16.66% {
+    transform: translate(-0.3px, 0.25px) scale(1.005);
+  }
+  25% {
+    transform: translate(-0.4px, 0.3px) scale(1);
+  }
+  33.33% {
+    transform: translate(-0.25px, 0.1px) scale(0.998);
+  }
+  41.66% {
+    transform: translate(0.1px, -0.15px) scale(0.996);
+  }
+  50% {
+    transform: translate(0.4px, -0.3px) scale(0.995);
+  }
+  58.33% {
+    transform: translate(0.25px, -0.2px) scale(0.998);
+  }
+  66.66% {
+    transform: translate(0.1px, -0.1px) scale(1);
+  }
+  75% {
+    transform: translate(-0.3px, -0.2px) scale(1.005);
+  }
+  83.33% {
+    transform: translate(-0.15px, -0.1px) scale(1.01);
+  }
+  91.66% {
+    transform: translate(0, 0) scale(1.012);
+  }
 }
 
-@media screen and (max-width:1300px){
-    .wrap {
-        h1 {
-            font-family: 'Noto Sans TC', sans-serif;
-            font-weight: 400;
-            font-size: clamp(2.5rem, 8vw, 5.625rem);
-            color: #333333;
-            margin: 1rem 0 0 5.5625rem;
-        }
+// 基礎樣式
+.wrap {
+  h1 {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 400;
+    color: #333333;
+  }
 
-        img {
-            display: block;
-            width: 90vw;
-            max-width: 68.0625rem;
-            height: auto;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: clamp(0.5rem, 5vw, 2rem);
-            z-index: -1;
-            border-radius: 1.25rem 1.25rem 0 0;
-            box-shadow: 0 -1px 0.3125rem rgba(0, 0, 0, 0.5);
-        }
+  img {
+    border-radius: 1.25rem;
+    box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.5);
+  }
 
-        .text {
-            width: 90vw;
-            background-color: #f2f2f2;
-            margin-left: auto;
-            margin-right: auto;
-            padding-bottom: 20px;
-            max-width: 68.0625rem;
-            border-radius: 0 0 1.25rem 1.25rem;
-            box-shadow: 0 1px 0.3125rem rgba(0, 0, 0, 0.5);
+  .text {
+    background-color: #f2f2f2;
+    border-radius: 1.25rem;
+    box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.5);
 
-            p,
-            a {
-                font-family: 'Noto Sans TC', sans-serif;
-                font-weight: clamp(1.5rem, 3vw, 2.25rem);
-                font-size: clamp(1.5rem, 3vw, 2.25rem);
-                color: #3d3d3d;
-                margin-left: 10px;
-            }
-
-            a {
-                display: inline-block;
-                margin-top: 0.5rem;
-                text-decoration: none;
-                color: #857a3d;
-
-                &:hover {
-                    animation: micro-shake 0.5s ease-in-out infinite;
-                    color: #3d3d3d;
-                }
-            }
-
-            @keyframes micro-shake {
-
-                0%,
-                100% {
-                    transform: translate(0, 0) scale(1.015);
-                }
-
-                8.33% {
-                    transform: translate(-0.15px, 0.1px) scale(1.01);
-                }
-
-                16.66% {
-                    transform: translate(-0.3px, 0.25px) scale(1.005);
-                }
-
-                25% {
-                    transform: translate(-0.4px, 0.3px) scale(1);
-                }
-
-                33.33% {
-                    transform: translate(-0.25px, 0.1px) scale(0.998);
-                }
-
-                41.66% {
-                    transform: translate(0.1px, -0.15px) scale(0.996);
-                }
-
-                50% {
-                    transform: translate(0.4px, -0.3px) scale(0.995);
-                }
-
-                58.33% {
-                    transform: translate(0.25px, -0.2px) scale(0.998);
-                }
-
-                66.66% {
-                    transform: translate(0.1px, -0.1px) scale(1);
-                }
-
-                75% {
-                    transform: translate(-0.3px, -0.2px) scale(1.005);
-                }
-
-                83.33% {
-                    transform: translate(-0.15px, -0.1px) scale(1.01);
-                }
-
-                91.66% {
-                    transform: translate(0, 0) scale(1.012);
-                }
-            }
-        }
+    p, a {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 500;
+      color: #3d3d3d;
     }
+
+    a {
+      display: inline-block;
+      text-decoration: none;
+
+      &:hover {
+        animation: micro-shake 0.5s ease-in-out infinite;
+      }
+    }
+  }
+}
+
+// 響應式樣式 - 桌面版 (> 1300px)
+@media screen and (min-width: 1301px) {
+  .wrap {
+    position: relative;
+
+    h1 {
+      font-size: clamp(3.5rem, 8vw, 5.625rem);
+      margin: 1.875rem 0 0 5.5625rem;
+    }
+
+    img {
+      width: 100%;
+      max-width: 68.0625rem;
+      height: auto;
+      float: right;
+      margin: 2.5rem 4.375rem 0 0;
+    }
+
+    .text {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 800px;
+      height: 270px;
+      margin-left: 5.5625rem;
+      margin-top: 20.625rem;
+
+      p, a {
+        font-size: clamp(1.5rem, 3vw, 2.25rem);
+        margin-left: 5.5625rem;
+        margin-top: 1.25rem;
+      }
+
+      a {
+        margin-top: 1.875rem;
+        color: #333333;
+      }
+    }
+  }
+}
+
+// 響應式樣式 - 平板及手機版 (<= 1300px)
+@media screen and (max-width: 1300px) {
+  .wrap {
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 5.625rem);
+      margin: 1rem 0 0 5.5625rem;
+    }
+
+    img {
+      display: block;
+      width: 90vw;
+      max-width: 68.0625rem;
+      height: auto;
+      margin: clamp(0.5rem, 5vw, 2rem) auto 0;
+      border-radius: 1.25rem 1.25rem 0 0;
+      box-shadow: 0 -1px 0.3125rem rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+
+    .text {
+      width: 90vw;
+      max-width: 68.0625rem;
+      margin: 0 auto;
+      padding-bottom: 20px;
+      border-radius: 0 0 1.25rem 1.25rem;
+      box-shadow: 0 1px 0.3125rem rgba(0, 0, 0, 0.5);
+
+      p, a {
+        font-size: clamp(1.5rem, 3vw, 2.25rem);
+        margin-left: 10px;
+      }
+
+      a {
+        margin-top: 0.5rem;
+        color: #857a3d;
+
+        &:hover {
+          color: #3d3d3d;
+        }
+      }
+    }
+  }
 }
