@@ -20,7 +20,7 @@
 
         h2 {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 5px;
         }
 
         label {
@@ -31,7 +31,6 @@
         input {
             width: 100%;
             line-height: 32px;
-            padding: 0 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 16px;
@@ -40,6 +39,7 @@
 
         button {
             padding: 10px;
+            margin-top: 10px;
             background-color: #007BFF;
             color: white;
             border: none;

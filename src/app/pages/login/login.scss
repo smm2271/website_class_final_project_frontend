@@ -10,6 +10,7 @@
         min-height: 350px;
         width: 300px;
         padding: 30px;
+        padding-bottom: 10px;
         background-color: rgba(186, 186, 186, 0.8);
         border: 3px solid rgb(162, 162, 162);
         border-radius: 10px;
@@ -31,7 +32,6 @@
         input {
             width: 100%;
             line-height: 32px;
-            padding: 0 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 16px;
@@ -40,6 +40,7 @@
 
         button {
             padding: 10px;
+            margin-top: 15px;
             background-color: #007BFF;
             color: white;
             border: none;
