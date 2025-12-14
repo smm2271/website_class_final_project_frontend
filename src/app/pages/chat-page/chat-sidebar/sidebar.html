@@ -1,1 +1,10 @@
-<p>sidebar works!</p>
+<div class="wrap">
+    <div class="room" (click)="createRoom()">CreateRoom</div>
+    @for (room of rooms; track room.id) {
+    <div (click)="selectChat( room )" class="room">
+        {{ room.name }}
+    </div>
+    } @empty {
+    <div>No chat rooms available</div>
+    }
+</div>

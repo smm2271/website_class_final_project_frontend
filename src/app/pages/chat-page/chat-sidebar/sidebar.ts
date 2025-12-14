@@ -1,16 +1,39 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { ChatMessageService } from '../../../services/message-service/message.service';
 
 @Component({
     selector: 'app-sidebar',
-    imports: [],
     templateUrl: './sidebar.html',
-    styleUrl: './sidebar.scss',
+    styleUrls: ['./sidebar.scss'],
 })
-export class Sidebar {
-    @Output() chatSelected = new EventEmitter<void>();
+export class Sidebar implements OnInit {
+    @Output() chatSelected = new EventEmitter<{ id: string; name: any }>();
 
-    // 在你的 HTML 中，當點擊某個聊天室時呼叫此方法
-    selectChat() {
-        this.chatSelected.emit();
+    rooms: any[] = []; // 先定義陣列
+
+    constructor(private chatMessageService: ChatMessageService) { }
+
+    ngOnInit() {
+        this.updateRooms();
+    }
+
+    updateRooms() {
+        this.chatMessageService.getRooms().then(rooms => {
+            this.rooms = rooms;
+            console.log("Updated chat rooms");
+            console.log(this.rooms);
+        });
+    }
+
+    selectChat(room: { id: string; name: any }) {
+        this.chatSelected.emit(room);
+    }
+    createRoom() {
+        const roomName = prompt('Enter room name:');
+        if (roomName) {
+            this.chatMessageService.createRoom(roomName).then(() => {
+                this.updateRooms();
+            });
+        }
     }
 }

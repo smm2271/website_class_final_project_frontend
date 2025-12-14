@@ -1,1 +1,15 @@
-<p>message-view works!</p>
+<div class="wrap">
+    {{ selectedRoom()?.name || 'Select a chat room' }}
+    @for (message of messageList; track $index) {
+    <div class="message">
+        <strong>{{ message.sender }}:</strong> {{ message.content }}
+    </div>
+    }@empty {
+    <div>No messages in this chat room.</div>
+    }
+
+    <form action="">
+        <input type="text" [(ngModel)]="newMessage" name="messageInput" placeholder="Type your message..." />
+        <button type="button" (click)="sendMessage()">Send</button>
+    </form>
+</div>

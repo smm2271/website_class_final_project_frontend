@@ -1,7 +1,7 @@
 import { Injectable, signal, computed, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap, catchError, throwError } from 'rxjs';
-import { User, AuthState } from '../models/user.model';
+import { User, AuthState } from '../../models/user-model/user.model';
 import { Router } from '@angular/router';
 
 // API 請求和響應介面
@@ -29,7 +29,7 @@ export interface UserResponseModel {
 export class UserService {
     private router = inject(Router);
     private http = inject(HttpClient);
-    private apiUrl = 'http://sumou.ddns.net:8000/user'; // 根據你的後端 API 路徑調整
+    private apiUrl = '/user'; // 根據後端 API 路徑調整
 
     // 使用 signal 來管理用戶狀態
     private authState = signal<AuthState>({
@@ -51,11 +51,11 @@ export class UserService {
     /**
      * 設置用戶登入狀態
      */
-    login(user: User, token: string): void {
+    login(user: User, token?: string | null): void {
         const newState: AuthState = {
             user,
             isAuthenticated: true,
-            token
+            token: token ?? null
         };
 
         this.authState.set(newState);
@@ -115,8 +115,8 @@ export class UserService {
             const storedState = localStorage.getItem('authState');
             if (storedState) {
                 const parsedState = JSON.parse(storedState) as AuthState;
-                // 驗證 token 是否仍然有效（可選）
-                if (parsedState.token) {
+                // 如果此前標記為已驗證 (cookie-based 情況下 token 可能為 null)，則恢復狀態
+                if (parsedState.isAuthenticated) {
                     this.authState.set(parsedState);
                 }
             }
@@ -153,6 +153,19 @@ export class UserService {
      */
     hasToken(): boolean {
         return !!this.token();
+    }
+
+    /**
+     * 獲取 token
+     */
+
+    getToken(): string | null {
+        {
+            if (!this.hasToken()) {
+                return null;
+            }
+            return this.token();
+        }
     }
 
     /**
@@ -206,8 +219,9 @@ export class UserService {
                     username: response.username,
                     email: response.user_id // 使用 user_id 作為 email 欄位
                 };
-                // 注意：token 通過 cookie 管理，不需要手動存儲
-                this.login(user, 'cookie-based'); // 使用佔位符表示基於 cookie 的認證
+                // 注意：token 通過 HttpOnly cookie 管理，前端無法讀取 token
+                // 只更新已驗證的用戶狀態，不設定假的 bearer token
+                this.login(user, null);
             }),
             catchError(error => {
                 console.error('登入失敗詳情:', {
@@ -264,7 +278,7 @@ export class UserService {
                     username: response.username,
                     email: response.user_id
                 };
-                this.login(user, 'cookie-based');
+                this.login(user, null);
             }),
             catchError(error => {
                 console.error('註冊失敗詳情:', {

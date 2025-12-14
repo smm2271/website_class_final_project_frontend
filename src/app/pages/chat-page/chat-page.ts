@@ -6,12 +6,14 @@ import { MessageView } from './message-view/message-view';
     selector: 'app-chat-page',
     imports: [Sidebar, MessageView],
     templateUrl: './chat-page.html',
-    styleUrl: './chat-page.scss',
+    styleUrls: ['./chat-page.scss'],  // 注意：styleUrls
 })
 export class Chat {
     isChatOpen = signal(true);
+    selectedRoom = signal<{ id: string; name: { id: string; name: string } } | null>(null);
 
-    onChatSelected() {
+    onChatSelected(room: { id: string; name: { id: string; name: string } }) {
+        this.selectedRoom.set(room);
         this.isChatOpen.set(true);
     }
 

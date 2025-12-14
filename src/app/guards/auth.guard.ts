@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Router, CanActivateFn } from '@angular/router';
-import { UserService } from '../services/user.service';
+import { UserService } from '../services/user-service/user.service';
 
 /**
  * 認證守衛 - 只允許已登入的用戶訪問

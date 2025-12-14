@@ -1,6 +1,6 @@
 import { Component, inject, signal, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { RouterLink, RouterModule, Router } from "@angular/router";
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../services/user-service/user.service';
 
 @Component({
     selector: 'nav-bar',

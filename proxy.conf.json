@@ -1,0 +1,20 @@
+{
+    "/user": {
+        "target": "http://sumou.ddns.net:8000",
+        "secure": false,
+        "changeOrigin": true,
+        "ws": true
+    },
+    "/message": {
+        "target": "http://sumou.ddns.net:8000",
+        "secure": false,
+        "changeOrigin": true,
+        "ws": true
+    },
+    "/online": {
+        "target": "http://sumou.ddns.net:8000",
+        "secure": false,
+        "changeOrigin": true,
+        "ws": true
+    }
+}
