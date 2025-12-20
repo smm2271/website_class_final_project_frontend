@@ -21,3 +21,14 @@
         transform: translateY(100vh) rotate(360deg);
     }
 }
+
+html,
+body {
+    // height: 100dvh;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

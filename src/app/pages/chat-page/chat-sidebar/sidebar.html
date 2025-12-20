@@ -1,10 +1,19 @@
-<div class="wrap">
-    <div class="room" (click)="createRoom()">CreateRoom</div>
-    @for (room of rooms; track room.id) {
-    <div (click)="selectChat( room )" class="room">
-        {{ room.name }}
+<div class="sidebar-container">
+    <div class="actions">
+        <div class="btn-action" (click)="createRoom()">建立聊天室</div>
+        <div class="btn-action" (click)="joinRoom()">加入聊天室</div>
     </div>
-    } @empty {
-    <div>No chat rooms available</div>
-    }
+
+    <div class="room-list">
+        @for (room of rooms; track room.id) {
+        <div (click)="selectChat(room)" class="room-item" [class.active]="activeRoomId === room.id">
+            <div class="room-icon">{{ room.name[0] | uppercase }}</div>
+            <div class="room-info">
+                <div class="room-name">{{ room.name }}</div>
+            </div>
+        </div>
+        } @empty {
+        <div style="padding: 20px; color: #999; text-align: center;">尚無聊天室</div>
+        }
+    </div>
 </div>

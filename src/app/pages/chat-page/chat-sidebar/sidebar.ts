@@ -1,15 +1,19 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
-import { ChatMessageService } from '../../../services/message-service/message.service';
+import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ChatMessageService, Room } from '../../../services/message-service/message.service';
 
 @Component({
     selector: 'app-sidebar',
+    standalone: true,
+    imports: [CommonModule],
     templateUrl: './sidebar.html',
     styleUrls: ['./sidebar.scss'],
 })
 export class Sidebar implements OnInit {
-    @Output() chatSelected = new EventEmitter<{ id: string; name: any }>();
+    @Input() activeRoomId?: string;
+    @Output() chatSelected = new EventEmitter<Room>();
 
-    rooms: any[] = []; // 先定義陣列
+    rooms: Room[] = []; // 先定義陣列
 
     constructor(private chatMessageService: ChatMessageService) { }
 
@@ -25,7 +29,7 @@ export class Sidebar implements OnInit {
         });
     }
 
-    selectChat(room: { id: string; name: any }) {
+    selectChat(room: Room) {
         this.chatSelected.emit(room);
     }
     createRoom() {
@@ -35,5 +39,12 @@ export class Sidebar implements OnInit {
                 this.updateRooms();
             });
         }
+    }
+    joinRoom() {
+        const roomName = prompt('Enter room id:');
+        if (roomName) {
+            this.chatMessageService.joinRoom(roomName);
+        }
+        this.updateRooms();
     }
 }

@@ -1,13 +1,31 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { UserService } from '../user-service/user.service';
+import { HttpClient } from '@angular/common/http';
+import { Injectable, inject } from '@angular/core';
+import { BehaviorSubject, Subject, lastValueFrom } from 'rxjs';
 
 export interface WSMessage {
-    message_id: string;
-    user_id: string;
-    chatroom_id: string;
+    id: string;
+    author_id: string;
+    author_name?: string;
     content: string;
-    timestamp: string;
+    created_at: string;
+    is_read: boolean;
+    chatroom_id?: string;
+}
+
+export interface NewMessageNotification extends WSMessage {
+    type: string;
+    chatroom_id: string;
+}
+
+export interface MessageListNotification {
+    type: string;
+    chatroom_id: string;
+    messages: WSMessage[];
+}
+
+export interface Room {
+    id: string;
+    name: string;
 }
 
 @Injectable({
@@ -15,54 +33,53 @@ export interface WSMessage {
 })
 export class ChatMessageService {
     private ws: WebSocket | null = null;
-
-    // WS 訊息 queue
     private messageQueue: any[] = [];
 
-    // Observable：給前端接收訊息
-    public incomingMessages$ = new Subject<WSMessage>();
-
-    // 連線狀態
+    public newMessage$ = new Subject<NewMessageNotification>();
+    public messageList$ = new Subject<MessageListNotification>();
     public connected$ = new BehaviorSubject<boolean>(false);
 
-    constructor(private userService: UserService) { }
+    base_url = '/api/message';
 
-    /** WebSocket 連線 */
+    private http = inject(HttpClient);
+
+    constructor() { }
+
+    /** ---------------- WebSocket ---------------- */
     connect(): void {
         if (this.ws) return;
 
         const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-        this.ws = new WebSocket(`${wsProtocol}://${window.location.host}/online`);
+        this.ws = new WebSocket(`${wsProtocol}://${window.location.host}${this.base_url}/online`);
 
         this.ws.onopen = () => {
             this.connected$.next(true);
-            console.log('WS connected');
-
-            // 發送 queue 中訊息
             while (this.messageQueue.length > 0) {
-                const data = this.messageQueue.shift();
-                this.ws!.send(JSON.stringify(data));
+                this.ws!.send(JSON.stringify(this.messageQueue.shift()));
             }
         };
 
         this.ws.onmessage = (event) => {
             try {
                 const data = JSON.parse(event.data);
-                this.incomingMessages$.next(data);
+                if (data.type === 'new_message') {
+                    this.newMessage$.next(data);
+                } else if (data.type === 'message_list') {
+                    // 前端可自行處理完整訊息列表
+                    console.log('Received messages', data);
+                    this.messageList$.next(data);
+                }
             } catch (err) {
                 console.error('Message parse error', err);
             }
         };
 
-        this.ws.onclose = (e) => {
-            console.warn('WS closed:', e.code);
+        this.ws.onclose = () => {
             this.connected$.next(false);
             this.ws = null;
         };
 
-        this.ws.onerror = (e) => {
-            console.error('WS error:', e);
-        };
+        this.ws.onerror = (e) => console.error('WS error', e);
     }
 
     disconnect(): void {
@@ -74,7 +91,6 @@ export class ChatMessageService {
 
     private send(data: any): void {
         if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
-            console.warn('WS not open, message queued:', data);
             this.messageQueue.push(data);
             return;
         }
@@ -93,49 +109,44 @@ export class ChatMessageService {
         this.send({ action_type: 'send_message', chatroom_id: roomId, content });
     }
 
-    markRead(messageId: string): void {
-        this.send({ action_type: 'mark_read', message_id: messageId });
+    getMessages(roomId: string, limit: number = 50, before?: string): void {
+        const data: any = { action_type: 'get_message', chatroom_id: roomId, limit };
+        if (before) data.before_created_at = before;
+        this.send(data);
     }
 
-    /** HTTP - 建立房間 */
-    createRoom(roomName: string): Promise<void> {
+    markRoomRead(roomId: string): void {
+        this.send({ action_type: 'mark_room_read', chatroom_id: roomId });
+    }
+
+    /** ---------------- HTTP API ---------------- */
+    createRoom(roomName?: string): Promise<Room> {
         const payload = { room_name: roomName };
-        return fetch('/message/create_room', {
-            method: 'POST',
-            credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-        })
-            .then(r => r.json())
-            .then(data => {
-                console.log('Room created:', data);
-            })
-            .catch(err => {
-                console.error('Error creating room:', err);
-                throw err;
-            });
+        return lastValueFrom(
+            this.http.post<any>(`${this.base_url}/create_room`, payload, { withCredentials: true })
+        ).then(data => ({
+            id: data.room_id,
+            name: roomName || `room_${data.room_id}`
+        })).catch(err => {
+            console.error('Error creating room', err);
+            throw err;
+        });
     }
 
-    /** HTTP - 取得房間列表 */
-    getRooms(): Promise<any[]> {
-        return fetch('/message/get_rooms', {
-            method: 'GET',
-            credentials: 'include'
-        })
-            .then(r => r.json())
-            .then(data => {
-                if (data && data.room_ids) {
-                    // 將物件轉成陣列 [{id, name}, ...]
-                    return Object.entries(data.room_ids).map(([id, roomData]) => ({
-                        id,
-                        name: roomData
-                    }));
-                }
-                return []; // 沒有房間就回空陣列
-            })
-            .catch(err => {
-                console.error('Error getting rooms:', err);
-                return [];
-            });
+    getRooms(): Promise<Room[]> {
+        return lastValueFrom(
+            this.http.get<any>(`${this.base_url}/get_rooms`, { withCredentials: true })
+        ).then(data => {
+            if (data?.room_ids) {
+                return Object.entries(data.room_ids).map(([id, name]) => ({
+                    id,
+                    name: name as string
+                }));
+            }
+            return [];
+        }).catch(err => {
+            console.error('Error getting rooms', err);
+            return [];
+        });
     }
 }

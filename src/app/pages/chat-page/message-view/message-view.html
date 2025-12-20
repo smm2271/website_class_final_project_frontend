@@ -1,15 +1,59 @@
-<div class="wrap">
-    {{ selectedRoom()?.name || 'Select a chat room' }}
-    @for (message of messageList; track $index) {
-    <div class="message">
-        <strong>{{ message.sender }}:</strong> {{ message.content }}
+<div class="message-view-container">
+    @if (selectedRoom()) {
+    <div class="chat-header">
+        <div class="header-left">
+            <button class="btn-back" (click)="goBack()">
+                <span class="icon">←</span>
+            </button>
+            <div class="room-info">
+                <div class="room-name">{{ selectedRoom()?.name }}</div>
+                <div class="room-status">線上連線中</div>
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-info" (click)="showChatID()">ID</button>
+        </div>
     </div>
-    }@empty {
-    <div>No messages in this chat room.</div>
-    }
 
-    <form action="">
-        <input type="text" [(ngModel)]="newMessage" name="messageInput" placeholder="Type your message..." />
-        <button type="button" (click)="sendMessage()">Send</button>
-    </form>
+    <div class="message-list" #messageContainer>
+        @for (message of historyMessageList(); track message.id) {
+        <div class="message-row"
+            [class.self]="message.author_id === userService.user()?.id || message.author_id === userService.user()?.email">
+            <div class="avatar">{{ message.author_name ? message.author_name[0] : 'U' }}</div>
+            <div class="message-content">
+                @if (message.author_id !== userService.user()?.id) {
+                <div class="author-name">
+                    {{ message.author_name }}
+                </div>
+                }
+                <div class="bubble">
+                    {{ message.content }}
+                </div>
+                <div class="time">{{ message.created_at | date:'HH:mm':'GMT+8' }}</div>
+            </div>
+        </div>
+        } @empty {
+        <div class="empty-state">
+            <div class="empty-icon">💬</div>
+            <p>尚無訊息，打個招呼吧！</p>
+        </div>
+        }
+    </div>
+
+    <div class="input-area">
+        <form (submit)="sendMessage(); $event.preventDefault()" class="input-form">
+            <input type="text" [ngModel]="newMessage()" (ngModelChange)="newMessage.set($event)" name="messageInput"
+                placeholder="輸入訊息..." autocomplete="off" />
+            <button type="submit" [disabled]="!newMessage().trim()">
+                <span class="send-icon">➤</span>
+            </button>
+        </form>
+    </div>
+    } @else {
+    <div class="no-selection">
+        <div class="illustration">🌸</div>
+        <h2>歡迎來到聊天室</h2>
+        <p>請從左側選單選擇一個房間開始聊天</p>
+    </div>
+    }
 </div>
