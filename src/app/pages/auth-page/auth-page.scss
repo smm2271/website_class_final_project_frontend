@@ -1,0 +1,62 @@
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffe8ef;
+    padding-top: clamp(50px, 10vw, 100px);
+
+    h2 {
+        font-size: 3rem;
+        margin-bottom: 5px;
+    }
+
+    p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+        color: #a3a3a3;
+    }
+
+    .form-container {
+        width: clamp(200px, 80vw, 33vw);
+        padding: 40px;
+        border-radius: 10px;
+        background-color: white;
+        box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.1);
+
+        .switch {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            background-color: #ffe8ef;
+            border-radius: 10px;
+
+            button {
+                width: 80%;
+                align-self: center;
+                margin: 10px 10px;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                // 預設非active
+                background-color: transparent;
+                color: #a3a3a3;
+                transition: all 0.3s ease;
+                font-weight: 500;
+                border-radius: 10px;
+
+                &:hover {
+                    color: #ec4899;
+                }
+
+                &.active {
+                    box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.1);
+                    background-color: white;
+                    color: #ec4899;
+                }
+            }
+        }
+
+    }
+}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService, UserRegisterForm } from '../../services/user-service/user.service';
+import { UserService, UserRegisterForm } from '../../../services/user-service/user.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { inject } from '@angular/core';
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 
 export class Register {
-    constructor(private userService: UserService) { }
+    private userService = inject(UserService);
     user_id: string = "";
     username: string = "";
     password: string = "";

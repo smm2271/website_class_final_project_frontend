@@ -1,0 +1,29 @@
+<div class="auth-container">
+    <h2>蘇氏 Chat</h2>
+    <p>
+        沒有多餘的功能
+        一句話，兩個人，就是全部。
+    </p>
+    <div class="form-container">
+        <div class="switch">
+            <button [class.active]="mode() === 'login'" (click)="switchMode('login')">
+                登入
+            </button>
+
+            <button [class.active]="mode() === 'register'" (click)="switchMode('register')">
+                註冊
+            </button>
+        </div>
+
+        @switch (mode()) {
+        @case ('login') {
+        <login-page />
+        }
+        @case ('register') {
+        <register-page />
+        }
+        }
+    </div>
+</div>
+
+<app-footer />

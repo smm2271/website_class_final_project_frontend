@@ -8,10 +8,12 @@
     <div class="user" #userContainer>
         @if (!userService.isAuthenticated()) {
         <div class="link_container">
-            <button [routerLink]="['/login']" type="button" class="auth-btn login">登入</button>
+            <button [routerLink]="['/signin']" [queryParams]="{ mode: 'login' }" type="button"
+                class="auth-btn login">登入</button>
         </div>
         <div class="link_container">
-            <button [routerLink]="['/register']" type="button" class="auth-btn register">註冊</button>
+            <button [routerLink]="['/signin']" [queryParams]="{ mode: 'register' }" type="button"
+                class="auth-btn register">註冊</button>
         </div>
         } @else {
         <p class="user_name" (click)="changeShowLogoutButtonStatus($event)">當前登入：{{ userService.user()?.username }}

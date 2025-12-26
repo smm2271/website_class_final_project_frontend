@@ -2,7 +2,7 @@
 .nav {
 
     user-select: none;
-    background-color: #FFCBCB;
+    background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -41,11 +41,35 @@
         .link_container {
             margin-right: 1.5625rem;
 
-            button {
+            .login,
+            .register {
+                padding: 0.3125rem 0.825rem;
+                margin-left: 0.625rem;
+                border-radius: 1.125rem;
+                transition: color 0.3s ease;
+            }
+
+            .login {
+                background-color: transparent;
+                font-size: clamp(1.5rem, 2.3vw, 3rem);
                 font-family: 'LXGW WenKai Mono TC', monospace;
-                background: transparent;
                 border: none;
-                color: #505050;
+                cursor: pointer;
+                transition: box-shadow 0.1s ease;
+
+                &:hover {
+                    color: #161616;
+                    box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+                }
+            }
+
+            .register {
+                background-color: #FF44AA;
+                color: white;
+                box-shadow: 0 0 0.3125rem rgba(255, 68, 170, 0.5);
+                font-size: clamp(1.5rem, 2.3vw, 3rem);
+                font-family: 'LXGW WenKai Mono TC', monospace;
+                border: none;
                 cursor: pointer;
 
                 &:hover {

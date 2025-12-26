@@ -1,0 +1,50 @@
+.footer {
+    background-color: white;
+    color: #333333;
+    padding: 2rem 1rem;
+    text-align: center;
+    font-family: 'LXGW WenKai Mono TC', monospace;
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+
+        .footer-brand {
+            .logo {
+                font-size: 2rem;
+            }
+
+            p {
+                margin-top: 0.5rem;
+                font-size: 1rem;
+                color: #333333;
+            }
+        }
+
+        .footer-links {
+            margin: 1.5rem 0;
+
+            a {
+                color: #ff44aa;
+                margin: 0 1rem;
+                text-decoration: none;
+                font-size: 1.125rem;
+            }
+        }
+
+        .footer-copy {
+            p {
+                font-size: 0.875rem;
+                color: #aaaaaa;
+
+                .mit-link {
+                    color: #ff44aa;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -5,33 +5,57 @@
     background-color: #fff2f2;
     // 不讓文字被選中
     user-select: none;
+    // display: flex;
+
 
     h1 {
         font-family: 'Noto Sans TC', sans-serif;
         font-weight: 400;
         color: #333333;
+
+        #title_pink_word {
+            color: #ec4899;
+            text-shadow: 1px 1px 0.3125rem rgba(236, 72, 153, 0.5);
+        }
     }
 
     img {
+        display: block;
         border-radius: 1.25rem;
         box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.5);
     }
 
     .text {
-        background-color: #ffeeee;
+        background-color: white;
         border-radius: 1.25rem;
         box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.5);
 
-        p,
-        a {
+        p {
             font-family: 'Noto Sans TC', sans-serif;
             font-weight: 500;
             color: #3d3d3d;
         }
 
-        a {
+        #start-link {
             display: inline-block;
             text-decoration: none;
+            border-radius: 3.25rem;
+            background-color: #ec4899;
+            padding: 1rem 2rem;
+            font-family: 'Noto Sans TC', sans-serif;
+            color: white;
+            font-weight: 400;
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            transition: background-color 0.3s ease;
+            box-shadow: 0 0 0.3125rem rgba(236, 72, 153, 0.5);
+
+            :visited {
+                color: white;
+            }
+
+            &:hover {
+                background-color: #db2777;
+            }
         }
     }
 }
@@ -63,7 +87,7 @@
             width: 800px;
             height: 270px;
             margin-left: 5.5625rem;
-            margin-top: 20.625rem;
+            margin-top: 33.625rem;
 
             p,
             a {

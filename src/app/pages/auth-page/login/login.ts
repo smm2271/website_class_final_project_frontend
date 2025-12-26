@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService, UserLoginForm } from '../../services/user-service/user.service';
+import { UserService, UserLoginForm } from '../../../services/user-service/user.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -27,7 +27,10 @@ export class Login {
             user_id: this.user_name,
             password: this.password
         };
-
+        if (this.user_name === "" || this.password === "") {
+            this.errorMessage = "請輸入帳號和密碼。";
+            return;
+        }
         this.userService.loginApi(loginForm).subscribe({
             next: (response) => {
                 console.log('登入成功:', response);

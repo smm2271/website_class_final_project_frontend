@@ -35,5 +35,8 @@
     // 檔案設定
     "files.eol": "\n",
     "files.insertFinalNewline": true,
-    "files.trimTrailingWhitespace": true
+    "files.trimTrailingWhitespace": true,
+    "python-envs.defaultEnvManager": "ms-python.python:conda",
+    "python-envs.defaultPackageManager": "ms-python.python:conda",
+    "python-envs.pythonProjects": []
 }
