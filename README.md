@@ -1,60 +1,45 @@
-# FinalProjectFrontEnd
+# 蘇氏 Chat - Web 程式設計期末專案
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.8.
+這是一個基於 Angular 19 開發的現代化即時聊天應用前端介面。專注於簡潔的用戶體驗與高效的狀態管理。
 
-## Development server
+> 「沒有多餘的功能。一句話，兩個人，就是全部。」
 
-To start a local development server, run:
+## 專案亮點
 
-```bash
-ng serve
-```
+- **現代化 UI/UX**：採用粉色調為主。
+- **響應式設計**：適配桌面端與行動端瀏覽器。
+- **完整認證流程**：包含登入、註冊、Token 自動刷新與路由守護。
+- **錯誤處理**：針對網路錯誤、認證失效提供即時的使用者回饋。
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 關鍵技術棧
 
-## Code scaffolding
+- **框架**: [Angular 19](https://angular.dev/)
+- **語言**: TypeScript
+- **樣式**: SCSS (Vanilla CSS Grid/Flexbox)
+- **圖標**: Font Awesome 7.0
+- **狀態管理**: Angular Signals & RxJS
+- **構建工具**: Angular CLI
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 快速開始
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+### 安裝環境
+確保您的開發環境已安裝 [Node.js](https://nodejs.org/) (建議 v20 以上)。
 
 ```bash
-ng build
+# 安裝依賴
+npm install
+
+# 啟動開發伺服器
+npm run start
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
+### 構建生產版本
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+## 專案架構摘要
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-"# website_class_final_project"
+- `src/app/pages/auth-page`: 統一的身份驗證中心（登入/註冊切換）。
+- `src/app/services/user-service`: 封裝 API 通訊與 Signal 狀態邏輯。
+- `src/app/shared`: 存放通用元件如 Footer, NavBar。
