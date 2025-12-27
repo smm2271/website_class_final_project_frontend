@@ -15,10 +15,10 @@ import { Footer } from '../../shared/footer/footer';
 })
 
 export class AuthPage {
-    private route = inject(ActivatedRoute);
-    private router = inject(Router);
+    private readonly route = inject(ActivatedRoute);
+    private readonly router = inject(Router);
 
-    private queryParams = toSignal(this.route.queryParamMap);
+    private readonly queryParams = toSignal(this.route.queryParamMap);
     mode = computed(() => {
         const mode = this.queryParams()?.get('mode');
         return isAuthMode(mode) ? mode : 'login';
