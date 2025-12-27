@@ -1,19 +1,17 @@
 <div class="sidebar-container">
     <div class="actions">
-        <div class="btn-action" (click)="createRoom()" (keydown.enter)="createRoom()" tabindex="0" role="button">建立聊天室
-        </div>
-        <div class="btn-action" (click)="joinRoom()" (keydown.enter)="joinRoom()" tabindex="0" role="button">加入聊天室</div>
+        <button class="btn-action" (click)="createRoom()" type="button">建立聊天室</button>
+        <button class="btn-action" (click)="joinRoom()" type="button">加入聊天室</button>
     </div>
 
     <div class="room-list">
         @for (room of rooms; track room.id) {
-        <div class="room-item" [class.active]="activeRoomId === room.id" (click)="selectChat(room)"
-            (keydown.enter)="selectChat(room)" tabindex="0" role="button">
+        <button class="room-item" [class.active]="activeRoomId === room.id" (click)="selectChat(room)" type="button">
             <div class="room-icon">{{ room.name[0] | uppercase }}</div>
             <div class="room-info">
                 <div class="room-name">{{ room.name }}</div>
             </div>
-        </div>
+        </button>
         } @empty {
         <div style="padding: 20px; color: #999; text-align: center;">尚無聊天室</div>
         }
