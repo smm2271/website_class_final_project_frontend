@@ -25,8 +25,8 @@ export class NavBar {
         }
     }
 
-    // 修改此方法，加入 event 參數
-    changeShowLogoutButtonStatus(event: MouseEvent) {
+    // 將參數類型改為 Event，這樣就能同時相容滑鼠點擊與鍵盤按下 Enter
+    changeShowLogoutButtonStatus(event: Event) {
         // 關鍵：阻止事件冒泡，避免觸發 document:click 導致立刻關閉
         event.stopPropagation();
 

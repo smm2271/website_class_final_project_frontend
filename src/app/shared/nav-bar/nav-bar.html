@@ -16,7 +16,9 @@
                 class="auth-btn register">註冊</button>
         </div>
         } @else {
-        <p class="user_name" (click)="changeShowLogoutButtonStatus($event)">當前登入：{{ userService.user()?.username }}
+        <p class="user_name" (click)="changeShowLogoutButtonStatus($event)"
+            (keydown.enter)="changeShowLogoutButtonStatus($event)" tabindex="0" role="button">
+            當前登入：{{ userService.user()?.username }}
         </p>
         @if (showLogoutButton()) {
         <div class="function_buttons">
