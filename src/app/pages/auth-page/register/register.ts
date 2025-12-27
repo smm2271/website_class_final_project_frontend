@@ -14,14 +14,15 @@ import { Router } from '@angular/router';
 })
 
 export class Register {
-    private userService = inject(UserService);
+    private readonly userService = inject(UserService);
+    private readonly router = inject(Router);
+
     user_id: string = "";
     username: string = "";
     password: string = "";
     confirm_password: string = "";
     is_passwords_match: boolean = true;
     error_message: string = "";
-    router = inject(Router);
 
     register() {
         this.is_passwords_match = this.password === this.confirm_password;

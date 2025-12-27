@@ -10,18 +10,18 @@ export interface UserResponseModel { id: string; user_id: string; username: stri
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-    private router = inject(Router);
-    private http = inject(HttpClient);
-    private apiUrl = '/api/user';
+    private readonly router = inject(Router);
+    private readonly http = inject(HttpClient);
+    private readonly apiUrl = '/api/user';
 
-    private authState = signal<AuthState>({ user: null, isAuthenticated: false, token: null });
+    private readonly authState = signal<AuthState>({ user: null, isAuthenticated: false, token: null });
     user = computed(() => this.authState().user);
     isAuthenticated = computed(() => this.authState().isAuthenticated);
     token = computed(() => this.authState().token);
 
     // token 刷新控制
+    private readonly refreshTokenSubject = new BehaviorSubject<boolean>(false);
     private refreshTokenInProgress = false;
-    private refreshTokenSubject = new BehaviorSubject<boolean>(false);
 
     constructor() { this.loadUserFromStorage(); }
 

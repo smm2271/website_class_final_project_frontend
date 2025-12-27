@@ -33,11 +33,11 @@ export interface Room {
 })
 export class ChatMessageService {
     private ws: WebSocket | null = null;
-    private messageQueue: any[] = [];
+    private readonly messageQueue: any[] = [];
 
-    public newMessage$ = new Subject<NewMessageNotification>();
-    public messageList$ = new Subject<MessageListNotification>();
-    public connected$ = new BehaviorSubject<boolean>(false);
+    public readonly newMessage$ = new Subject<NewMessageNotification>();
+    public readonly messageList$ = new Subject<MessageListNotification>();
+    public readonly connected$ = new BehaviorSubject<boolean>(false);
 
     base_url = '/api/message';
 

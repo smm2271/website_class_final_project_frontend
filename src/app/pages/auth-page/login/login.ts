@@ -19,8 +19,8 @@ export class Login {
     errorMessage: string = "";
 
 
-    private userService = inject(UserService);
-    private router = inject(Router);
+    private readonly userService = inject(UserService);
+    private readonly router = inject(Router);
 
     login() {
         const loginForm: UserLoginForm = {

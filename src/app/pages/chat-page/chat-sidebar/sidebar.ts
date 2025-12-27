@@ -15,7 +15,7 @@ export class Sidebar implements OnInit {
 
     rooms: Room[] = []; // 先定義陣列
 
-    constructor(private chatMessageService: ChatMessageService) { }
+    constructor(private readonly chatMessageService: ChatMessageService) { }
 
     ngOnInit() {
         this.updateRooms();

@@ -22,8 +22,8 @@ export class MessageView implements AfterViewChecked {
     @ViewChild('messageContainer') messageContainer!: ElementRef<HTMLDivElement>;
 
     constructor(
-        private chatMessageService: ChatMessageService,
-        public userService: UserService
+        private readonly chatMessageService: ChatMessageService,
+        public readonly userService: UserService
     ) {
         chatMessageService.connect();
 
