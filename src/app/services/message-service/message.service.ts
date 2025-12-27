@@ -49,8 +49,8 @@ export class ChatMessageService {
     connect(): void {
         if (this.ws) return;
 
-        const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-        this.ws = new WebSocket(`${wsProtocol}://${window.location.host}${this.base_url}/online`);
+        const wsProtocol = globalThis.location.protocol === 'https:' ? 'wss' : 'ws';
+        this.ws = new WebSocket(`${wsProtocol}://${globalThis.location.host}${this.base_url}/online`);
 
         this.ws.onopen = () => {
             this.connected$.next(true);
