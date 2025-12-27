@@ -1,12 +1,14 @@
 <div class="sidebar-container">
     <div class="actions">
-        <div class="btn-action" (click)="createRoom()">建立聊天室</div>
-        <div class="btn-action" (click)="joinRoom()">加入聊天室</div>
+        <div class="btn-action" (click)="createRoom()" (keydown.enter)="createRoom()" tabindex="0" role="button">建立聊天室
+        </div>
+        <div class="btn-action" (click)="joinRoom()" (keydown.enter)="joinRoom()" tabindex="0" role="button">加入聊天室</div>
     </div>
 
     <div class="room-list">
         @for (room of rooms; track room.id) {
-        <div (click)="selectChat(room)" class="room-item" [class.active]="activeRoomId === room.id">
+        <div class="room-item" [class.active]="activeRoomId === room.id" (click)="selectChat(room)"
+            (keydown.enter)="selectChat(room)" tabindex="0" role="button">
             <div class="room-icon">{{ room.name[0] | uppercase }}</div>
             <div class="room-info">
                 <div class="room-name">{{ room.name }}</div>
