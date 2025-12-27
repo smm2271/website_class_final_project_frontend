@@ -1,17 +1,5 @@
 /* 全局樣式 */
 
-// 櫻花動畫效果
-.sakura {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    background: #FFB6C1;
-    border-radius: 50% 0;
-    opacity: 0.8;
-    z-index: -1;
-    animation: fall linear infinite;
-}
-
 @keyframes fall {
     0% {
         transform: translateY(-100vh) rotate(0deg);
@@ -24,7 +12,6 @@
 
 html,
 body {
-    // height: 100dvh;
     height: 100%;
 }
 

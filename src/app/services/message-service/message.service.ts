@@ -41,7 +41,7 @@ export class ChatMessageService {
 
     base_url = '/api/message';
 
-    private http = inject(HttpClient);
+    private readonly http = inject(HttpClient);
 
     constructor() { }
 

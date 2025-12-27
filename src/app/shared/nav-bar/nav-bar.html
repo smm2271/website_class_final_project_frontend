@@ -19,7 +19,6 @@
         <p class="user_name" (click)="changeShowLogoutButtonStatus($event)">當前登入：{{ userService.user()?.username }}
         </p>
         @if (showLogoutButton()) {
-        <!-- <a [routerLink]="['/chat']"></a> -->
         <div class="function_buttons">
             <button (click)="startChat()">開始聊天</button>
             <button (click)="logout()">登出</button>
