@@ -1,13 +1,9 @@
-// 基礎樣式 - 所有斷點共用
 .nav {
-
     user-select: none;
     background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
-
 
     .logo {
         height: 100%;
@@ -38,6 +34,26 @@
         align-items: center;
         position: relative;
 
+        .user_name_btn {
+            font-family: 'LXGW WenKai Mono TC', monospace;
+            margin-right: 1.5625rem;
+            background: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            color: inherit;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: #FF44AA; // 滑鼠懸停反饋
+            }
+
+            &:focus {
+                outline: 2px solid rgba(255, 68, 170, 0.5); // 提供鍵盤操作視覺焦點
+                border-radius: 4px;
+            }
+        }
+
         .link_container {
             margin-right: 1.5625rem;
 
@@ -47,18 +63,15 @@
                 margin-left: 0.625rem;
                 border-radius: 1.125rem;
                 transition: color 0.3s ease;
+                border: none;
+                cursor: pointer;
+                font-family: 'LXGW WenKai Mono TC', monospace;
             }
 
             .login {
                 background-color: transparent;
-                font-size: clamp(1.5rem, 2.3vw, 3rem);
-                font-family: 'LXGW WenKai Mono TC', monospace;
-                border: none;
-                cursor: pointer;
-                transition: box-shadow 0.1s ease;
 
                 &:hover {
-                    color: #161616;
                     box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
                 }
             }
@@ -66,21 +79,11 @@
             .register {
                 background-color: #FF44AA;
                 color: white;
-                box-shadow: 0 0 0.3125rem rgba(255, 68, 170, 0.5);
-                font-size: clamp(1.5rem, 2.3vw, 3rem);
-                font-family: 'LXGW WenKai Mono TC', monospace;
-                border: none;
-                cursor: pointer;
 
                 &:hover {
                     color: #161616;
                 }
             }
-        }
-
-        .user_name {
-            font-family: 'LXGW WenKai Mono TC', monospace;
-            margin-right: 1.5625rem;
         }
 
         .function_buttons {
@@ -90,21 +93,22 @@
             display: flex;
             flex-direction: column;
             z-index: 1000;
+            background: #FFCBCB;
 
             button {
-
                 display: inline-block;
                 font-family: 'LXGW WenKai Mono TC', monospace;
-                background: #FFCBCB;
+                background: transparent;
                 border: none;
                 color: #505050;
+                padding: 10px 20px;
                 cursor: pointer;
 
                 &:hover {
+                    background: rgba(0, 0, 0, 0.05);
                     color: #161616;
                 }
             }
-
         }
     }
 }
