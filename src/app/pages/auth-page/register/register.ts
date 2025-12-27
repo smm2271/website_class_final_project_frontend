@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UserService, UserRegisterForm } from '../../../services/user-service/user.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
